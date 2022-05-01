@@ -1,0 +1,18 @@
+<body style="background-color:#f5decf;" >
+    <%if(movies.length > 0){%>
+        <%for(recipe of recipes){%>
+        <ul>
+            <li>
+                Title: <%=movie.Title %> <br>
+                Cuisine: <%=movie.Cuisine %> <br>
+            </li>
+        </ul>
+        <%}%>
+    <%}else{%>
+        No results found!
+    <%}%>
+
+    <div class="col">
+        <a href="/home"> Back to homepage</a>
+    </div>
+</body>
