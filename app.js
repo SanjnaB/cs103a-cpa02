@@ -94,7 +94,7 @@ module.exports = app;
 
 /*Authentication*/
 const auth = require('./routes/auth');
-const Recipes = require("./models/Recipes");
+const Recipe = require("./models/Recipe");
 app.use(auth)
 
 // middleware to test is the user is logged in, and if not, send them to the login page
@@ -117,7 +117,7 @@ app.get("/new", isLoggedIn, async(req,res,next)=> {
 
 app.get("/home",isLoggedIn, async(req,res,next)=>{
     let userId = res.locals.user._id;  // get the user's id
-    let items = await Movie.find({userId:userId}); // lookup the user's movie items
+    let items = await Recipe.find({userId:userId}); // lookup the user's movie items
     res.locals.items = items;  //make the items available in the view
     res.render("homepage");
 });
@@ -125,10 +125,11 @@ app.get("/home",isLoggedIn, async(req,res,next)=>{
 
 app.post("/addRecipe",(req,res,next)=>{
   const userId = res.locals.user._id;
-  const {recipe_name} = req.body
+  const {recipe_name, recipe_cuisine} = req.body
   const newRecipe = new Recipes({
       userId:userId,
       Title:recipe_name,
+      Cuisine: recipe_cuisine
   });
 
   newRecipe.save()
