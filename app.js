@@ -150,9 +150,9 @@ app.get("/about", (req,res,next)=>{
 });
 
 app.get("/favorites", (req,res,next)=>{
-  res.render("feedback")
+  res.render("favorites")
 });
 
 app.post("/leave_favorites",(req,res,next)=>{
-    res.redirect("/feedback")
+    res.redirect("/favorites")
 });
