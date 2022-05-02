@@ -148,10 +148,10 @@ app.get("/about", (req,res,next)=>{
 
 });
 
-app.get("/feedback", (req,res,next)=>{
+app.get("/favorites", (req,res,next)=>{
   res.render("feedback")
 });
 
-app.post("/leave_feedback",(req,res,next)=>{
+app.post("/leave_favorites",(req,res,next)=>{
     res.redirect("/feedback")
 });
