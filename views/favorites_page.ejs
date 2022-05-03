@@ -1,0 +1,16 @@
+<p>My Favorites:</p>
+    </div>
+    <div>
+        <% if(favorites.length > 0) {%>
+        <ul>
+            <%for(favorite of favorites){%>
+                <li>
+                        <%=favorite.Title%> 
+                </li>
+            <%}%>
+        </ul>
+        <%} else{%>
+            <p> No favorites yet</p>
+        <%}%>
+        </div>
+ </div>

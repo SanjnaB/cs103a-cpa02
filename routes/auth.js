@@ -44,9 +44,9 @@ router.use((req,res,next) => {
 })
 
 
-router.get("/login", (req,res) => {
-  res.render("login")
-})
+// router.get("/login", (req,res) => {
+//   res.render("login")
+// })
 
 router.post('/login',
   async (req,res,next) => {
@@ -58,11 +58,11 @@ router.post('/login',
       if (isMatch) {
         req.session.username = username //req.body
         req.session.user = user
-        res.redirect('/')
+        res.redirect('/home')
       } else {
         req.session.username = null
         req.session.user = null
-        res.redirect('/login')
+        res.redirect('/')
       }
     }catch(e){
       next(e)
@@ -74,7 +74,7 @@ router.post('/signup',
     try {
       const {username,passphrase,passphrase2,age} = req.body
       if (passphrase != passphrase2){
-        res.redirect('/login')
+        res.redirect('/')
       }else {
         const encrypted = await bcrypt.hash(passphrase, saltRounds);
 
@@ -94,7 +94,7 @@ router.post('/signup',
           await user.save()
           req.session.username = user.username
           req.session.user = user
-          res.redirect('/')
+          res.redirect('/home')
         }
         
         

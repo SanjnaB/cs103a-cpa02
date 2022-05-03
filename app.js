@@ -16,10 +16,10 @@ const user = require("./models/User")
 /* load the JSON objects here if you have them */
 
 
-/* initialize the database*/
+/* initialize the database*/ //require('dotenv').config();
 const mongoose = require('mongoose');
-require('dotenv').config();
-mongoose.connect( process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true } );
+const mongoose_URI = 'mongodb+srv://sanjnabandaru:cpa02password@cluster0.1kj9s.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+mongoose.connect( mongoose_URI, { useNewUrlParser: true, useUnifiedTopology: true } );
 
 const db = mongoose.connection; //connects to the database
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -95,6 +95,7 @@ module.exports = app;
 /*Authentication*/
 const auth = require('./routes/auth');
 const Recipe = require("./models/Recipe");
+const Favorite = require("./models/Favorite");
 app.use(auth)
 
 // middleware to test is the user is logged in, and if not, send them to the login page
@@ -126,7 +127,7 @@ app.get("/home",isLoggedIn, async(req,res,next)=>{
 app.post("/addRecipe",(req,res,next)=>{
   const userId = res.locals.user._id;
   const {recipe_name, recipe_cuisine} = req.body
-  const newRecipe = new Recipes({
+  const newRecipe = new Recipe({
       userId:userId,
       Title:recipe_name,
       Cuisine: recipe_cuisine
@@ -140,8 +141,8 @@ app.post("/search",async (req,res,next)=>{
   let obj = JSON.parse(JSON.stringify(req.body));
   let recipe_title = obj.recipe_name
   let recipe = await Recipe.find({Title: {$regex: recipe_title}});
-  res.locals.recipes = recipes;
-  res.render("search_page",{ recipes: recipes})
+  res.locals.recipes = recipe;
+  res.render("search_page",{recipes: recipe})
 
 });
 app.get("/about", (req,res,next)=>{
@@ -153,6 +154,24 @@ app.get("/favorites", (req,res,next)=>{
   res.render("favorites")
 });
 
+app.get("/favorites_page", async (req,res,next)=>{
+  const userId = res.locals.user._id;
+  let favorite = await Favorite.find({userId: userId});
+  res.locals.favorites = favorite;
+  res.render("favorites_page", {favorites:favorite})
+
+});
+
 app.post("/leave_favorites",(req,res,next)=>{
-    res.redirect("/favorites")
+  const userId = res.locals.user._id;
+  const {favorites} = req.body
+  console.log(favorites)
+  const newFavorite = new Favorite({
+      userId:userId,
+      Title:favorites
+  });
+
+  newFavorite.save()
+    
+  res.redirect("/favorites")
 });
