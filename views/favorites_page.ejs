@@ -1,16 +1,19 @@
-<p>My Favorites:</p>
-    </div>
-    <div>
+<body style="background-color:#f5decf;" >
+    <h1>
+        My favorites:
+    </h1>
         <% if(favorites.length > 0) {%>
         <ul>
             <%for(favorite of favorites){%>
                 <li>
-                        <%=favorite.Title%> 
+                <%=favorite.Title%> 
                 </li>
             <%}%>
         </ul>
         <%} else{%>
             <p> No favorites yet</p>
         <%}%>
+        <div class="col">
+            <a href="/home"> Back to homepage</a>
         </div>
- </div>
+</body>
