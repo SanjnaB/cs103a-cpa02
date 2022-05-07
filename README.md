@@ -39,3 +39,10 @@ nodemon
 
 4. To search for a recipe, click "Search for a recipe by title"
 
+5. To add a recipe to your favorites, go to the "add to favorites tab" & add your recipe of choice 
+
+6. To see your favorite recipes, go to the "See my favorites" tab 
+<p align="center">
+  <img src="see_my_favorites.png">
+</p>
+
