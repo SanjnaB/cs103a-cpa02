@@ -10,8 +10,8 @@ Link to app pitch or proof of concept: https://brandeis.zoom.us/rec/share/MGzkL8
 Visit the following link to use the app: https://blooming-forest-16385.herokuapp.com/
 
 ## Instructions for installing and running app locally 
-Make sure to download nodejs and npm from https://nodejs.org 
-Download project from github and cd into directory of choice 
+Make sure to download nodejs and npm from https://nodejs.org.  
+Download project from github and cd into directory of choice. 
 
 Install the packages with
 ``` bash
